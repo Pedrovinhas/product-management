@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  /* Surfaces */
+  --color-surface: #f7f9fb;
+  --color-surface-hover: #f2f4f6;
+  --color-surface-subtle: #eceef0;
+
+  /* Text */
+  --color-ink: #191c1e;
+  --color-muted: #4c4546;
+  --color-placeholder: #7e7576;
+
+  /* Borders */
+  --color-border: #cfc4c5;
+  --color-border-inner: #e0e3e5;
+
+  /* Semantic */
+  --color-danger: #ba1a1a;
+  --color-danger-bg: #ffdad6;
+  --color-danger-text: #93000a;
+  --color-info-bg: #d0e1fb;
+  --color-info-text: #38485d;
+}
+
+:root {
+  font-family: 'Instrument Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+body {
+  @apply m-0 bg-zinc-50 text-zinc-900 antialiased;
+}
+
+#app {
+  @apply min-h-screen;
+}
+
+* {
+  box-sizing: border-box;
+}
