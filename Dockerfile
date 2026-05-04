@@ -98,7 +98,7 @@ FROM nginx:1.27-alpine AS web
 
 COPY --from=runner /var/www/html/public /var/www/html/public
 COPY --from=frontend-builder /app/dist /var/www/frontend
-COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY docker/nginx/prod.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

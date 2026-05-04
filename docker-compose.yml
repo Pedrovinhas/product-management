@@ -1,0 +1,51 @@
+services:
+  app:
+    image: ${DOCKERHUB_USERNAME}/product-app:${APP_VERSION:-latest}
+    container_name: product_app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    env_file:
+      - ./backend/.env
+    networks:
+      - product_network
+    depends_on:
+      db:
+        condition: service_healthy
+
+  nginx:
+    image: ${DOCKERHUB_USERNAME}/product-nginx:${APP_VERSION:-latest}
+    container_name: product_nginx
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:80"
+    networks:
+      - product_network
+    depends_on:
+      - app
+
+  db:
+    image: postgres:17-alpine
+    container_name: product_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-product_db}
+      POSTGRES_USER: ${DB_USERNAME:-product_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-secret}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - product_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-product_user} -d ${DB_DATABASE:-product_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+networks:
+  product_network:
+    driver: bridge
+
+volumes:
+  pgdata:
+    driver: local
