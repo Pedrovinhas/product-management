@@ -20,9 +20,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->statefulApi();
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        $exceptions->dontReport(\DomainException::class);
+        $exceptions->dontReport(DomainException::class);
 
-        $exceptions->render(function (AuthenticationException $e, Request $request): JsonResponse|null {
+        $exceptions->render(function (AuthenticationException $e, Request $request): ?JsonResponse {
             if ($request->expectsJson() || $request->is('api/*')) {
                 return response()->json([
                     'data' => null,
@@ -34,7 +34,7 @@ return Application::configure(basePath: dirname(__DIR__))
             return null;
         });
 
-        $exceptions->render(function (ModelNotFoundException $e, Request $request): JsonResponse|null {
+        $exceptions->render(function (ModelNotFoundException $e, Request $request): ?JsonResponse {
             if ($request->expectsJson() || $request->is('api/*')) {
                 return response()->json([
                     'data' => null,
@@ -46,7 +46,7 @@ return Application::configure(basePath: dirname(__DIR__))
             return null;
         });
 
-        $exceptions->render(function (ValidationException $e, Request $request): JsonResponse|null {
+        $exceptions->render(function (ValidationException $e, Request $request): ?JsonResponse {
             if ($request->expectsJson() || $request->is('api/*')) {
                 return response()->json([
                     'data' => null,
@@ -58,7 +58,7 @@ return Application::configure(basePath: dirname(__DIR__))
             return null;
         });
 
-        $exceptions->render(function (\DomainException $e, Request $request): JsonResponse|null {
+        $exceptions->render(function (DomainException $e, Request $request): ?JsonResponse {
             if ($request->expectsJson() || $request->is('api/*')) {
                 return response()->json([
                     'data' => null,

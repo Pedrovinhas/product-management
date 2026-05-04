@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\DAOs\StockHistoryDAO;
 use App\Http\Resources\StockHistoryResource;
 use App\Services\ProductService;
-use App\DAOs\StockHistoryDAO;
 use Illuminate\Http\JsonResponse;
 
 class StockHistoryController extends Controller

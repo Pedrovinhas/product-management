@@ -9,4 +9,3 @@ Route::get('/', function () {
 Route::get('/api-docs', function () {
     return view('api-docs');
 });
-

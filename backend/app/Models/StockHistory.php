@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
@@ -18,7 +19,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $quantity
  * @property int $previous_stock
  * @property int $current_stock
- * @property \Illuminate\Support\Carbon $created_at
+ * @property Carbon $created_at
  */
 #[UseFactory(StockHistoryFactory::class)]
 #[Fillable(['product_id', 'user_id', 'type', 'quantity', 'previous_stock', 'current_stock'])]

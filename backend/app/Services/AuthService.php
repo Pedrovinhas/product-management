@@ -10,6 +10,7 @@ class AuthService
 {
     /**
      * @return array{token: string, user: User}
+     *
      * @throws AuthenticationException
      */
     public function login(string $email, string $password): array
