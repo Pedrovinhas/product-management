@@ -49,6 +49,9 @@ CMD ["php-fpm"]
 # Stage 1.5: frontend-builder — builds Vue app assets
 FROM node:24-alpine AS frontend-builder
 
+ARG VITE_API_BASE_URL=http://localhost/api
+ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
+
 WORKDIR /app
 
 COPY frontend/package.json frontend/package-lock.json ./
@@ -82,7 +85,13 @@ COPY backend/ .
 COPY docker/php/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-RUN chown -R www-data:www-data /var/www/html \
+RUN mkdir -p \
+        /var/www/html/storage/framework/cache \
+        /var/www/html/storage/framework/sessions \
+        /var/www/html/storage/framework/views \
+        /var/www/html/storage/logs \
+        /var/www/html/bootstrap/cache \
+    && chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage \
     && chmod -R 775 /var/www/html/bootstrap/cache
 
