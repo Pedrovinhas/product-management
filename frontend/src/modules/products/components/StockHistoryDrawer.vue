@@ -63,7 +63,7 @@ function goToNext() {
 <template>
   <template v-if="open">
     <div
-      class="fixed inset-0 z-[95] bg-black/20 backdrop-blur-sm"
+      class="fixed inset-0 z-[95] bg-black/20 backdrop-blur-sm w-screen h-screen"
       @click="handleClose"
     />
 

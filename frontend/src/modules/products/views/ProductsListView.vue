@@ -12,8 +12,27 @@ const { items, isLoading, currentPage, lastPage, total, from, to, fetchList } = 
 const { isDeleting, deleteProduct } = useProductDelete()
 
 const searchInput = ref('')
-const priceFilter = ref('all')
 const stockFilter = ref('all')
+const minPriceDisplay = ref('')
+const maxPriceDisplay = ref('')
+const minPriceInput = ref<number | ''>('')
+const maxPriceInput = ref<number | ''>('')
+const minStockInput = ref<number | ''>('')
+const maxStockInput = ref<number | ''>('')
+
+function applyPriceMask(e: Event, target: 'min' | 'max') {
+  const input = e.target as HTMLInputElement
+  const digits = input.value.replace(/\D/g, '')
+  if (!digits) {
+    if (target === 'min') { minPriceDisplay.value = ''; minPriceInput.value = '' }
+    else { maxPriceDisplay.value = ''; maxPriceInput.value = '' }
+    return
+  }
+  const value = parseInt(digits, 10) / 100
+  const formatted = value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  if (target === 'min') { minPriceDisplay.value = formatted; minPriceInput.value = value }
+  else { maxPriceDisplay.value = formatted; maxPriceInput.value = value }
+}
 
 // Modal state
 const isModalOpen = ref(false)
@@ -40,12 +59,18 @@ onMounted(async () => {
 })
 
 async function onSearchSubmit() {
+  const hasCustomStock = minStockInput.value !== '' || maxStockInput.value !== ''
+
   await fetchList({
     search: searchInput.value,
-    min_price: priceFilter.value === 'under-100' ? 0 : priceFilter.value === '100-500' ? 100 : priceFilter.value === 'over-500' ? 500 : undefined,
-    max_price: priceFilter.value === 'under-100' ? 100 : priceFilter.value === '100-500' ? 500 : undefined,
-    min_stock: stockFilter.value === 'in-stock' ? 11 : stockFilter.value === 'low-stock' ? 1 : stockFilter.value === 'out-of-stock' ? 0 : undefined,
-    max_stock: stockFilter.value === 'low-stock' ? 10 : stockFilter.value === 'out-of-stock' ? 0 : undefined,
+    min_price: minPriceInput.value !== '' ? Number(minPriceInput.value) : undefined,
+    max_price: maxPriceInput.value !== '' ? Number(maxPriceInput.value) : undefined,
+    min_stock: hasCustomStock
+      ? (minStockInput.value !== '' ? Number(minStockInput.value) : undefined)
+      : (stockFilter.value === 'in-stock' ? 11 : stockFilter.value === 'low-stock' ? 1 : stockFilter.value === 'out-of-stock' ? 0 : undefined),
+    max_stock: hasCustomStock
+      ? (maxStockInput.value !== '' ? Number(maxStockInput.value) : undefined)
+      : (stockFilter.value === 'low-stock' ? 10 : stockFilter.value === 'out-of-stock' ? 0 : undefined),
     page: 1,
   })
 }
@@ -182,45 +207,110 @@ function getSku(id: number) {
       </div>
 
       <div class="overflow-hidden border border-[#cfc4c5] bg-white">
-        <form class="flex flex-col gap-4 border-b border-[#cfc4c5] bg-[#f7f9fb] p-5 lg:flex-row lg:items-center lg:justify-between" @submit.prevent="onSearchSubmit">
-          <div class="flex flex-col gap-3 sm:flex-row">
-            <input
-              id="search"
-              v-model="searchInput"
-              type="text"
-              class="h-10 min-w-[220px] border border-[#cfc4c5] bg-white px-3 text-sm outline-none transition focus:border-black focus-visible:ring-2 focus-visible:ring-black"
-              placeholder="Buscar produto..."
-            />
-            <select
-              v-model="priceFilter"
-              class="h-10 min-w-[180px] border border-[#cfc4c5] bg-white px-3 text-sm outline-none transition focus:border-black"
-            >
-              <option value="all">Todos os Preços</option>
-              <option value="under-100">Abaixo de R$ 100</option>
-              <option value="100-500">R$ 100 - R$ 500</option>
-              <option value="over-500">Acima de R$ 500</option>
-            </select>
-            <select
-              v-model="stockFilter"
-              class="h-10 min-w-[180px] border border-[#cfc4c5] bg-white px-3 text-sm outline-none transition focus:border-black"
-            >
-              <option value="all">Status de Estoque</option>
-              <option value="in-stock">Em estoque</option>
-              <option value="low-stock">Estoque baixo</option>
-              <option value="out-of-stock">Esgotado</option>
-            </select>
-            <button
-              type="submit"
-              class="h-10 border border-black bg-black px-4 text-sm font-semibold text-white transition hover:bg-[#1b1b1b]"
-            >
-              Filtrar
-            </button>
-          </div>
+        <form class="border-b border-[#cfc4c5] bg-[#f7f9fb] p-5" @submit.prevent="onSearchSubmit">
+          <div class="flex flex-wrap items-end gap-x-5 gap-y-4">
 
-          <p class="text-sm text-[#4c4546]">
-            Exibindo <span class="font-semibold text-black">{{ visibleFrom }}-{{ visibleTo }}</span> de
-            <span class="font-semibold text-black">{{ total }}</span>
-          </p>
+            <!-- Produto -->
+            <div class="flex flex-col gap-1.5">
+              <label for="search" class="text-[10px] font-semibold uppercase tracking-[0.1em] text-[#4c4546]">Produto</label>
+              <input
+                id="search"
+                v-model="searchInput"
+                type="text"
+                class="h-10 w-52 border border-[#cfc4c5] bg-white px-3 text-sm outline-none transition focus:border-black focus-visible:ring-2 focus-visible:ring-black"
+                placeholder="Buscar produto..."
+              />
+            </div>
+
+            <div class="hidden h-10 w-px self-end bg-[#e0e3e5]" />
+
+            <!-- Preço -->
+            <div class="flex flex-col gap-1.5">
+              <label class="text-[10px] font-semibold uppercase tracking-[0.1em] text-[#4c4546]">Preço (R$)</label>
+              <div class="flex items-center gap-2">
+                <div class="relative">
+                  <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 select-none text-xs text-[#4c4546]">R$</span>
+                  <input
+                    :value="minPriceDisplay"
+                    type="text"
+                    inputmode="numeric"
+                    class="h-10 w-28 border border-[#cfc4c5] bg-white pl-8 pr-3 text-sm outline-none transition focus:border-black focus-visible:ring-2 focus-visible:ring-black"
+                    placeholder="0,00"
+                    @input="applyPriceMask($event, 'min')"
+                  />
+                </div>
+                <span class="text-sm text-[#9aa0a6]">—</span>
+                <div class="relative">
+                  <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 select-none text-xs text-[#4c4546]">R$</span>
+                  <input
+                    :value="maxPriceDisplay"
+                    type="text"
+                    inputmode="numeric"
+                    class="h-10 w-28 border border-[#cfc4c5] bg-white pl-8 pr-3 text-sm outline-none transition focus:border-black focus-visible:ring-2 focus-visible:ring-black"
+                    placeholder="0,00"
+                    @input="applyPriceMask($event, 'max')"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="hidden h-10 w-px self-end bg-[#e0e3e5]" />
+
+            <!-- Qtd. Estoque -->
+            <div class="flex flex-col gap-1.5">
+              <label class="text-[10px] font-semibold uppercase tracking-[0.1em] text-[#4c4546]">Qtd. Estoque</label>
+              <div class="flex items-center gap-2">
+                <input
+                  v-model="minStockInput"
+                  type="number"
+                  min="0"
+                  step="1"
+                  class="h-10 w-24 border border-[#cfc4c5] bg-white px-3 text-sm outline-none transition focus:border-black focus-visible:ring-2 focus-visible:ring-black"
+                  placeholder="Mín."
+                />
+                <span class="text-sm text-[#9aa0a6]">—</span>
+                <input
+                  v-model="maxStockInput"
+                  type="number"
+                  min="0"
+                  step="1"
+                  class="h-10 w-24 border border-[#cfc4c5] bg-white px-3 text-sm outline-none transition focus:border-black focus-visible:ring-2 focus-visible:ring-black"
+                  placeholder="Máx."
+                />
+              </div>
+            </div>
+
+            <div class="hidden h-10 w-px self-end bg-[#e0e3e5]" />
+
+            <!-- Status -->
+            <div class="flex flex-col gap-1.5">
+              <label class="text-[10px] font-semibold uppercase tracking-[0.1em] text-[#4c4546]">Status</label>
+              <select
+                v-model="stockFilter"
+                class="h-10 min-w-[160px] border border-[#cfc4c5] bg-white px-3 text-sm outline-none transition focus:border-black"
+              >
+                <option value="all">Todos</option>
+                <option value="in-stock">Em estoque</option>
+                <option value="low-stock">Estoque baixo</option>
+                <option value="out-of-stock">Esgotado</option>
+              </select>
+            </div>
+
+            <!-- Filtrar + contagem -->
+            <div class="flex flex-1 items-end justify-between gap-4">
+              <button
+                type="submit"
+                class="h-10 border border-black bg-black px-5 text-sm font-semibold text-white transition hover:bg-[#1b1b1b]"
+              >
+                Filtrar
+              </button>
+              <p class="text-sm text-[#4c4546]">
+                Exibindo <span class="font-semibold text-black">{{ visibleFrom }}-{{ visibleTo }}</span> de
+                <span class="font-semibold text-black">{{ total }}</span>
+              </p>
+            </div>
+
+          </div>
         </form>
 
         <div class="overflow-x-auto">
