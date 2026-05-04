@@ -16,9 +16,6 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->statefulApi();
-    })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->dontReport(DomainException::class);
 
