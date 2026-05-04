@@ -7,16 +7,16 @@ export const productSchema = toTypedSchema(
     name: z
       .string()
       .min(1, 'Informe o nome do produto.')
-      .max(255, 'O nome deve ter no maximo 255 caracteres.'),
+      .max(255, 'O nome deve ter no máximo 255 caracteres.'),
     description: z
       .string()
-      .max(2000, 'A descricao deve ter no maximo 2000 caracteres.')
+      .max(2000, 'A descrição deve ter no máximo 2000 caracteres.')
       .optional()
       .default(''),
     price: z.coerce
-      .number({ invalid_type_error: 'Informe um preco valido maior que zero.' })
-      .min(0.01, 'Informe um preco valido maior que zero.')
-      .max(MAX_VALUE, 'O preco maximo permitido e 99.999.999,99.'),
+      .number({ invalid_type_error: 'Informe um preço válido maior que zero.' })
+      .min(0.01, 'Informe um preço válido maior que zero.')
+      .max(MAX_VALUE, 'O preço máximo permitido é 99.999.999,99.'),
     stock_quantity: z.coerce
       .number({ invalid_type_error: 'Informe um estoque inicial valido.' })
       .int('O estoque deve ser um numero inteiro.')

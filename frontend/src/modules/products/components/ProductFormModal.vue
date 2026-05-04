@@ -34,10 +34,10 @@ const [price] = defineField('price')
 const [stock_quantity] = defineField('stock_quantity')
 
 const modalTitle = computed(() =>
-  props.mode === 'create' ? 'Cadastro de Produto' : 'Edicao de Produto',
+  props.mode === 'create' ? 'Cadastro de Produto' : 'Edição de Produto',
 )
 const actionLabel = computed(() =>
-  props.mode === 'create' ? 'Salvar Produto' : 'Salvar Alteracoes',
+  props.mode === 'create' ? 'Salvar Produto' : 'Salvar Alterações',
 )
 
 watch(
@@ -129,21 +129,21 @@ function handleClose() {
             v-model="name"
             type="text"
             class="h-11 w-full border border-[#cfc4c5] bg-[#f7f9fb] px-3 text-base text-[#191c1e] outline-none transition focus:border-black focus-visible:ring-2 focus-visible:ring-black"
-            placeholder="Ex: Placa Mae Z790-P"
+            placeholder="Ex: Placa-Mãe Z790-P"
           />
           <p class="mt-1 text-xs text-[#ba1a1a]" role="alert">{{ errors.name }}</p>
         </div>
 
         <div>
           <label class="mb-2 block text-sm font-semibold text-[#191c1e]" for="product-description">
-            Descricao
+            Descrição
           </label>
           <textarea
             id="product-description"
             v-model="description"
             class="w-full resize-none border border-[#cfc4c5] bg-[#f7f9fb] px-3 py-2.5 text-base text-[#191c1e] outline-none transition focus:border-black focus-visible:ring-2 focus-visible:ring-black"
             rows="4"
-            placeholder="Descreva os detalhes tecnicos e especificacoes..."
+            placeholder="Descreva os detalhes técnicos e especificações..."
           />
           <p class="mt-1 text-xs text-[#ba1a1a]" role="alert">{{ errors.description }}</p>
         </div>
@@ -151,7 +151,7 @@ function handleClose() {
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <label class="mb-2 block text-sm font-semibold text-[#191c1e]" for="product-price">
-              Preco (R$)
+              Preço (R$)
             </label>
             <CurrencyInput
               id="product-price"

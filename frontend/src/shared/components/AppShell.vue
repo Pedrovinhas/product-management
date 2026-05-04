@@ -30,10 +30,10 @@ const isProductsSection = computed(() => route.path.startsWith('/products'))
 async function logout() {
   try {
     await authStore.logout()
-    success('Sessao encerrada com sucesso.')
+    success('Sessão encerrada com sucesso.')
     await router.push({ name: 'login' })
   } catch {
-    error('Nao foi possivel encerrar a sessao no momento.')
+    error('Não foi possível encerrar a sessão no momento.')
   }
 }
 </script>
@@ -42,8 +42,8 @@ async function logout() {
   <div class="min-h-screen bg-[#f7f9fb] text-[#191c1e]">
     <aside class="fixed left-0 top-0 z-40 hidden h-full w-[260px] border-r border-[#cfc4c5] bg-white lg:flex lg:flex-col">
       <div class="px-6 pb-7 pt-6">
-        <h1 class="text-[30px] font-bold leading-none text-black">Gestao ERP</h1>
-        <p class="mt-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#4c4546]">Operacoes</p>
+        <h1 class="text-[30px] font-bold leading-none text-black">Gestão ERP</h1>
+        <p class="mt-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#4c4546]">Operações</p>
       </div>
 
       <nav class="flex flex-col gap-1">
@@ -65,7 +65,7 @@ async function logout() {
       <div class="flex h-full items-center justify-between px-4 sm:px-6">
         <div class="flex items-center gap-3 lg:hidden">
           <span class="inline-flex h-8 w-8 items-center justify-center border border-black bg-black text-xs font-semibold text-white">ERP</span>
-          <span class="text-sm font-semibold text-black">Gestao ERP</span>
+          <span class="text-sm font-semibold text-black">Gestão ERP</span>
         </div>
 
         <div class="hidden lg:block" />
@@ -74,7 +74,7 @@ async function logout() {
           <button
             type="button"
             class="inline-flex h-9 w-9 items-center justify-center border border-transparent text-[#4c4546] transition hover:border-[#cfc4c5] hover:bg-[#f2f4f6]"
-            aria-label="Notificacoes"
+            aria-label="Notificações"
           >
             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M6 10C6 6.68629 8.68629 4 12 4C15.3137 4 18 6.68629 18 10V14L20 16V17H4V16L6 14V10Z" stroke="currentColor" stroke-width="1.6" />
@@ -85,7 +85,7 @@ async function logout() {
           <button
             type="button"
             class="inline-flex h-9 w-9 items-center justify-center border border-transparent text-[#4c4546] transition hover:border-[#cfc4c5] hover:bg-[#f2f4f6]"
-            aria-label="Configuracoes"
+            aria-label="Configurações"
           >
             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 9.5C10.6193 9.5 9.5 10.6193 9.5 12C9.5 13.3807 10.6193 14.5 12 14.5C13.3807 14.5 14.5 13.3807 14.5 12C14.5 10.6193 13.3807 9.5 12 9.5Z" stroke="currentColor" stroke-width="1.6" />
@@ -96,7 +96,7 @@ async function logout() {
           <div class="hidden h-8 w-px bg-[#cfc4c5] sm:block" />
 
           <div class="hidden text-right sm:block">
-            <p class="text-sm font-semibold text-black">{{ user?.name ?? 'Usuario' }}</p>
+            <p class="text-sm font-semibold text-black">{{ user?.name ?? 'Usuário' }}</p>
             <p class="text-xs text-[#4c4546]">Operador</p>
           </div>
 

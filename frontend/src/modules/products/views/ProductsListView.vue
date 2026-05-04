@@ -123,8 +123,8 @@ function getSku(id: number) {
     <div class="mx-auto max-w-7xl space-y-6">
       <div class="flex flex-col justify-between gap-4 py-2 sm:flex-row sm:items-center">
         <div>
-          <h2 class="text-[32px] font-semibold leading-[1.2] tracking-[-0.01em] text-black">Gestao de Produtos</h2>
-          <p class="mt-1 text-base text-[#4c4546]">Visualize e gerencie seu catalogo completo de mercadorias.</p>
+          <h2 class="text-[32px] font-semibold leading-[1.2] tracking-[-0.01em] text-black">Gestão de Produtos</h2>
+          <p class="mt-1 text-base text-[#4c4546]">Visualize e gerencie seu catálogo completo de mercadorias.</p>
         </div>
 
         <button
@@ -195,7 +195,7 @@ function getSku(id: number) {
               v-model="priceFilter"
               class="h-10 min-w-[180px] border border-[#cfc4c5] bg-white px-3 text-sm outline-none transition focus:border-black"
             >
-              <option value="all">Todos os Precos</option>
+              <option value="all">Todos os Preços</option>
               <option value="under-100">Abaixo de R$ 100</option>
               <option value="100-500">R$ 100 - R$ 500</option>
               <option value="over-500">Acima de R$ 500</option>
@@ -228,10 +228,10 @@ function getSku(id: number) {
             <thead>
               <tr class="border-b border-[#cfc4c5] bg-[#eceef0] text-[10px] font-semibold uppercase tracking-[0.12em] text-[#4c4546]">
                 <th class="px-6 py-4">Produto</th>
-                <th class="px-6 py-4">Preco</th>
+                <th class="px-6 py-4">Preço</th>
                 <th class="px-6 py-4">Estoque</th>
                 <th class="px-6 py-4">Status</th>
-                <th class="px-6 py-4 text-right">Acoes</th>
+                <th class="px-6 py-4 text-right">Ações</th>
               </tr>
             </thead>
 
@@ -286,7 +286,7 @@ function getSku(id: number) {
                     <button
                       type="button"
                       class="inline-flex h-8 w-8 items-center justify-center border border-transparent text-[#4c4546] transition hover:border-[#cfc4c5] hover:bg-white"
-                      aria-label="Ver historico do produto"
+                      aria-label="Ver histórico do produto"
                       @click="openHistoryDrawer(item)"
                     >
                       <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

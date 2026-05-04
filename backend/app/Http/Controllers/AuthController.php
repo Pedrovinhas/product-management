@@ -25,7 +25,7 @@ class AuthController extends Controller
                 'token' => $result['token'],
                 'user' => new UserResource($result['user']),
             ],
-            'message' => 'Login successful.',
+            'message' => 'Login realizado com sucesso.',
             'errors' => [],
         ]);
     }
@@ -39,7 +39,7 @@ class AuthController extends Controller
 
         return response()->json([
             'data' => null,
-            'message' => 'Logged out successfully.',
+            'message' => 'Sessão encerrada com sucesso.',
             'errors' => [],
         ]);
     }
@@ -51,7 +51,7 @@ class AuthController extends Controller
 
         return response()->json([
             'data' => new UserResource($user),
-            'message' => 'User retrieved successfully.',
+            'message' => 'Usuário recuperado com sucesso.',
             'errors' => [],
         ]);
     }

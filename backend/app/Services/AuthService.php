@@ -18,7 +18,7 @@ class AuthService
         $user = User::where('email', $email)->first();
 
         if (! $user instanceof User || ! Hash::check($password, $user->password)) {
-            throw new AuthenticationException('Invalid credentials.');
+            throw new AuthenticationException('Credenciais inválidas.');
         }
 
         $token = $user->createToken('api-token')->plainTextToken;

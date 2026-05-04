@@ -34,14 +34,14 @@ function handleClose() {
 
 function getTitle(type: StockType) {
   if (type === 'entrada') return 'Entrada de Estoque'
-  if (type === 'saída') return 'Saida de Estoque'
+  if (type === 'saída') return 'Saída de Estoque'
   return 'Ajuste de Estoque'
 }
 
 function getNote(entry: StockHistoryEntry) {
-  if (entry.type === 'entrada') return 'Entrada registrada no inventario.'
-  if (entry.type === 'saída') return 'Saida registrada no inventario.'
-  return 'Ajuste manual registrado no inventario.'
+  if (entry.type === 'entrada') return 'Entrada registrada no inventário.'
+  if (entry.type === 'saída') return 'Saída registrada no inventário.'
+  return 'Ajuste manual registrado no inventário.'
 }
 
 function getBadgeClass(type: StockType) {
@@ -70,7 +70,7 @@ function goToNext() {
     <aside
       ref="drawerRef"
       role="complementary"
-      :aria-label="`Historico de estoque: ${product?.name ?? 'Produto'}`"
+      :aria-label="`Histórico de estoque: ${product?.name ?? 'Produto'}`"
       class="fixed right-0 top-0 z-[100] flex h-full w-full max-w-[420px] flex-col border-l border-[#cfc4c5] bg-white shadow-2xl"
     >
       <header class="flex h-16 items-center justify-between border-b border-[#e0e3e5] px-6">
@@ -82,7 +82,7 @@ function goToNext() {
             </svg>
           </div>
           <div>
-            <h3 class="text-xl font-semibold text-black">Historico de Edicao</h3>
+            <h3 class="text-xl font-semibold text-black">Histórico de Edição</h3>
             <p class="text-[10px] font-semibold uppercase tracking-[0.1em] text-[#4c4546]">
               {{ product?.name ?? 'Produto' }}
             </p>
@@ -92,7 +92,7 @@ function goToNext() {
         <button
           type="button"
           class="inline-flex h-8 w-8 items-center justify-center text-[#4c4546] transition hover:bg-[#eceef0] focus-visible:ring-2 focus-visible:ring-black"
-          aria-label="Fechar historico"
+          aria-label="Fechar histórico"
           @click="handleClose"
         >
           <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -103,10 +103,10 @@ function goToNext() {
       </header>
 
       <div class="flex-1 overflow-y-auto p-6" role="status" aria-live="polite" aria-atomic="false">
-        <div v-if="isLoading" class="text-sm text-[#4c4546]">Carregando historico...</div>
+        <div v-if="isLoading" class="text-sm text-[#4c4546]">Carregando histórico...</div>
 
         <div v-else-if="items.length === 0" class="text-sm text-[#4c4546]">
-          Nenhuma movimentacao encontrada para este produto.
+          Nenhuma movimentação encontrada para este produto.
         </div>
 
         <div
@@ -171,7 +171,7 @@ function goToNext() {
             Anterior
           </button>
 
-          <span class="text-sm text-[#4c4546]">Pagina {{ page }} de {{ lastPage }}</span>
+          <span class="text-sm text-[#4c4546]">Página {{ page }} de {{ lastPage }}</span>
 
           <button
             type="button"
@@ -179,7 +179,7 @@ function goToNext() {
             :disabled="!canGoNext || isLoading"
             @click="goToNext"
           >
-            Proximo
+            Próximo
           </button>
         </div>
       </footer>

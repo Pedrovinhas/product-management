@@ -21,7 +21,7 @@ class StockHistoryController extends Controller
 
         return response()->json([
             'data' => StockHistoryResource::collection($history)->response()->getData(true),
-            'message' => 'Stock history retrieved successfully.',
+            'message' => 'Histórico de estoque recuperado com sucesso.',
             'errors' => [],
         ]);
     }

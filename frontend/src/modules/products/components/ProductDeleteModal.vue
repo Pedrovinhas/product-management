@@ -46,7 +46,7 @@ function handleConfirm() {
     >
       <header class="flex items-center justify-between border-b border-[#e0e3e5] px-8 py-6">
         <h3 id="delete-modal-title" class="text-[30px] font-semibold leading-none tracking-[-0.01em] text-black">
-          Confirmar Exclusao
+          Confirmar Exclusão
         </h3>
         <button
           type="button"
@@ -66,7 +66,7 @@ function handleConfirm() {
           Tem certeza que deseja excluir <strong>{{ productName }}</strong>?
         </p>
         <p class="text-sm text-[#4c4546]">
-          Esta acao nao pode ser desfeita.
+          Esta ação não pode ser desfeita.
         </p>
       </div>
 

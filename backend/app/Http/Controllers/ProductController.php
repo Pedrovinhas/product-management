@@ -22,7 +22,7 @@ class ProductController extends Controller
 
         return response()->json([
             'data' => ProductResource::collection($products)->response()->getData(true),
-            'message' => 'Products retrieved successfully.',
+            'message' => 'Produtos recuperados com sucesso.',
             'errors' => [],
         ], 200, [], JSON_PRESERVE_ZERO_FRACTION);
     }
@@ -39,7 +39,7 @@ class ProductController extends Controller
 
         return response()->json([
             'data' => new ProductResource($product),
-            'message' => 'Product created successfully.',
+            'message' => 'Produto criado com sucesso.',
             'errors' => [],
         ], 201, [], JSON_PRESERVE_ZERO_FRACTION);
     }
@@ -50,7 +50,7 @@ class ProductController extends Controller
 
         return response()->json([
             'data' => new ProductResource($product),
-            'message' => 'Product retrieved successfully.',
+            'message' => 'Produto recuperado com sucesso.',
             'errors' => [],
         ], 200, [], JSON_PRESERVE_ZERO_FRACTION);
     }
@@ -68,7 +68,7 @@ class ProductController extends Controller
 
         return response()->json([
             'data' => new ProductResource($product),
-            'message' => 'Product updated successfully.',
+            'message' => 'Produto atualizado com sucesso.',
             'errors' => [],
         ], 200, [], JSON_PRESERVE_ZERO_FRACTION);
     }
@@ -79,7 +79,7 @@ class ProductController extends Controller
 
         return response()->json([
             'data' => null,
-            'message' => 'Product deleted successfully.',
+            'message' => 'Produto excluído com sucesso.',
             'errors' => [],
         ]);
     }

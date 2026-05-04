@@ -15,11 +15,11 @@ export function useProductDelete() {
 
     try {
       await productsService.remove(id)
-      success('Produto excluido com sucesso.')
+      success('Produto excluído com sucesso.')
       await productsStore.fetchList({ page: currentPage.value })
       return true
     } catch {
-      error('Nao foi possivel excluir o produto no momento.')
+      error('Não foi possível excluir o produto no momento.')
       return false
     } finally {
       isDeleting.value = false

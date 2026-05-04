@@ -27,7 +27,7 @@ export function useProductForm() {
       await productsStore.fetchList()
       return true
     } catch {
-      error('Nao foi possivel salvar o produto no momento.')
+      error('Não foi possível salvar o produto no momento.')
       return false
     } finally {
       isSubmitting.value = false
@@ -56,7 +56,7 @@ export function useProductForm() {
       await productsStore.fetchList()
       return true
     } catch {
-      error('Nao foi possivel salvar o produto no momento.')
+      error('Não foi possível salvar o produto no momento.')
       return false
     } finally {
       isSubmitting.value = false
