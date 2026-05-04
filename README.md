@@ -41,7 +41,7 @@ Acesse:
 
 | Serviço  | URL                   |
 |----------|-----------------------|
-| API/App  | http://localhost      |
+| API  | http://localhost      |
 | Frontend | http://localhost:5173 |
 
 ---
