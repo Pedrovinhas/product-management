@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
+Route::get('/health', fn () => response()->json(['status' => 'ok', 'timestamp' => now()->toISOString()]));
+
 Route::post('/auth/login', [AuthController::class, 'login'])
     ->middleware('throttle:login');
 
