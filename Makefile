@@ -64,7 +64,7 @@ pint:
 	docker exec $(APP) ./vendor/bin/pint
 
 stan:
-	docker exec $(APP) ./vendor/bin/phpstan analyse
+	docker exec $(APP) ./vendor/bin/phpstan analyse --memory-limit=512M
 
 install:
 	docker exec $(APP) composer install
